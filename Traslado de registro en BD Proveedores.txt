@@ -1,0 +1,78 @@
+Dim wbBDProv As Workbook
+Dim shBDPRov As Worksheet
+Dim strNomProv, strRutaBDProv, strNitCed, strCiudadProv, strTelProv, strLineaProducto As String
+
+strRutaBDProv = Trim(Hoja5.Cells(2, 9))
+
+registrar = True
+    
+Application.ScreenUpdating = False
+app.Visible = False
+Set wbBDProv = Workbooks.Open(strRutaBDProv, False)
+Set shBDPRov = wbBDProv.Sheets(1)
+lRow = shBDPRov.Cells(Rows.Count, 1).End(xlUp).Row
+lRow = lRow + 1
+
+
+If (UBound(arrTempLineas) >= 1) Then
+    strLineaProductoG = arrTempLineas(0)
+    strLineaProductoE = arrTempLineas(1)
+Else
+    strLineaProductoG = arrTempLineas(0)
+    strLineaProductoE = "-"
+End If
+
+intFilaST = 35
+    intFilaCP = 25
+    strNomProv = Trim(Hoja2.Cells(intFilaST, 2))
+    
+    Do While (strNomProv <> "")
+        
+        strNitCed = Trim(Hoja2.Cells(intFilaST, 4))
+        strTelProv = Trim(Hoja2.Cells(intFilaST, 6))
+        strCiudadProv = Trim(Hoja2.Cells(intFilaST, 7))
+        Hoja4.Cells(intFilaCP, 2) = strNomProv
+        Hoja4.Cells(intFilaCP, 5) = Trim(Hoja2.Cells(intFilaST, 6))
+        Hoja4.Cells(intFilaCP, 7) = strNitCed
+        
+        If (Trim(Hoja2.Cells(intFilaST, 9)) <> "" And IsNumeric(Trim(Hoja2.Cells(intFilaST, 9)))) Then
+            lngValor = CLng(Trim(Hoja2.Cells(intFilaST, 9)))
+        Else
+            lngValor = 0
+        End If
+        
+         If (Trim(Hoja2.Cells(intFilaST, 11)) <> "" And IsNumeric(Trim(Hoja2.Cells(intFilaST, 11)))) Then
+            lngValorIVA = CLng(Trim(Hoja2.Cells(intFilaST, 11)))
+        Else
+            lngValorIVA = 0
+        End If
+        
+        Hoja4.Cells(intFilaCP, 9) = lngValor + lngValorIVA
+        
+        If (registrar = True) Then
+            shBDPRov.Cells(lRow, 1) = strNitCed
+            shBDPRov.Cells(lRow, 2) = strNomProv
+            shBDPRov.Cells(lRow, 3) = strTelProv
+            shBDPRov.Cells(lRow, 4) = strCiudadProv
+            shBDPRov.Cells(lRow, 5) = strLineaProductoG
+            shBDPRov.Cells(lRow, 6) = strLineaProductoE
+            shBDPRov.Cells(lRow, 7) = strDescrProducto
+            shBDPRov.Cells(lRow, 8) = strFecha
+            lRow = lRow + 1
+        End If
+    
+        intFilaST = intFilaST + 1
+        intFilaCP = intFilaCP + 1
+        strNomProv = Trim(Hoja2.Cells(intFilaST, 2))
+        lngValor = 0
+        lngValorIVA = 0
+        strNitCed = ""
+        strTelProv = ""
+        strCiudadProv = ""
+    Loop
+    
+    intError = 4
+    If (registrar = True) Then
+        wbBDProv.Close saveChanges:=True
+    End If
+    Application.ScreenUpdating = True

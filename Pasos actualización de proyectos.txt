@@ -1,0 +1,10 @@
+1. Copiar toda la información de los proyectos existentes en la hoja Parámetros hacia una nueva hoja.
+2. Extraer los proyectos de Investigación y Sostenibilidad activos que se encuentren en Total Proyectos.
+3. Copiar los proyectos del punto 2 a una nueva hoja en la planilla de solicitud de trámite.
+4. Hacer el cruce de los proyectos que hacen faltan a través de la función buscarv.
+5. Agregar los proyectos que faltan al listado del punto 2.
+6. Ordenar dicho listado alfabéticamente a través del nombre del grupo.
+7. Copiar todo el listado ordenado a la hoja Parámetros en las respectivas columnas.
+8. Actualizar los rangos de los proyectos en el Administrador de Nombres, verificando si existen nuevos grupos de investigación.
+9. Ocultar la hoja "Parámetros".
+10. Subir la nueva versión de la planilla al directorio compartido en Drive.
