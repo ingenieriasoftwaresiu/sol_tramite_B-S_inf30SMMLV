@@ -1,0 +1,1 @@
+SELECT replace(ig.name,' ','_') AS ivgroup, p.name, p.siucode, cc.code FROM projects p, investigation_groups ig, costcenter cc WHERE (p.invgroupid = ig.id) AND (p.costcenterid = cc.id) and (p.statusid = '1') and (p.typologyid = '1' or p.typologyid = '3' or p.typologyid = '6') and (ig.`name` != 'Regalías' and ig.`name` != 'Administración SIU') ORDER BY ig.name;
